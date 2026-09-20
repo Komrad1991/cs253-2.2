@@ -1,4 +1,4 @@
-Heuristic: Manhattan+2*LC+CornerConflict, timeout per call: 10 s
+Heuristic: JS-style (Manh+LC+CornerConflict), timeout per call: 10 s
 BFS: bidirectional, node limit = 200000000, max expected length = 35
 IDA*: TT 22 bits (4194304 entries)
 
@@ -34,9 +34,9 @@ Hex: 0x123456789abcdef0
 9 A B C 
 D E F    
 
-BFS (bidirectional): length = 0, nodes = 0, time = 0.007 ms
-A*: length = 0, nodes = 0, time = 0.0001 ms
-IDA*: length = 0, nodes = 0, time = 0.0002 ms
+BFS (bidirectional): length = 0, nodes = 0, time = 0.0106 ms
+A*: length = 0, nodes = 0, time = 0.0002 ms
+IDA*: length = 0, nodes = 0, time = 0.0003 ms
 
 ================================================
 Position: 1234067859ACDEBF
@@ -48,8 +48,8 @@ Hex: 0x1234067859acdebf
 5 9 A C 
 D E B F 
 
-BFS (bidirectional): length = 5, nodes = 11, time = 0.0354 ms
-A*: length = 5, nodes = 6, time = 0.6405 ms
+BFS (bidirectional): length = 5, nodes = 11, time = 0.0337 ms
+A*: length = 5, nodes = 6, time = 0.5799 ms
 Move 1: D
 Hex: 0x1234567809acdebf
 1 2 3 4 
@@ -85,7 +85,7 @@ Hex: 0x123456789abcdef0
 9 A B C 
 D E F    
 
-IDA*: length = 5, nodes = 12, time = 0.0056 ms
+IDA*: length = 5, nodes = 12, time = 0.0081 ms
 
 ================================================
 Position: 5134207896ACDEBF
@@ -97,8 +97,8 @@ Hex: 0x5134207896acdebf
 9 6 A C 
 D E B F 
 
-BFS (bidirectional): length = 8, nodes = 52, time = 0.0351 ms
-A*: length = 8, nodes = 13, time = 0.6438 ms
+BFS (bidirectional): length = 8, nodes = 52, time = 0.0352 ms
+A*: length = 8, nodes = 13, time = 0.7461 ms
 Move 1: L
 Hex: 0x5134027896acdebf
 5 1 3 4 
@@ -155,7 +155,7 @@ Hex: 0x123456789abcdef0
 9 A B C 
 D E F    
 
-IDA*: length = 8, nodes = 24, time = 0.0089 ms
+IDA*: length = 8, nodes = 24, time = 0.0082 ms
 
 ================================================
 Position: 16245A3709C8DEBF
@@ -167,8 +167,8 @@ Hex: 0x16245a3709c8debf
    9 C 8 
 D E B F 
 
-BFS (bidirectional): length = 10, nodes = 97, time = 0.0328 ms
-A*: length = 10, nodes = 11, time = 0.5702 ms
+BFS (bidirectional): length = 10, nodes = 97, time = 0.0352 ms
+A*: length = 10, nodes = 11, time = 0.5646 ms
 Move 1: R
 Hex: 0x16245a3790c8debf
 1 6 2 4 
@@ -239,7 +239,7 @@ Hex: 0x123456789abcdef0
 9 A B C 
 D E F    
 
-IDA*: length = 10, nodes = 20, time = 0.007 ms
+IDA*: length = 10, nodes = 20, time = 0.0116 ms
 
 ================================================
 Position: 1723068459ACDEBF
@@ -251,8 +251,8 @@ Hex: 0x1723068459acdebf
 5 9 A C 
 D E B F 
 
-BFS (bidirectional): length = 13, nodes = 324, time = 0.0467 ms
-A*: length = 13, nodes = 33, time = 0.6359 ms
+BFS (bidirectional): length = 13, nodes = 324, time = 0.0483 ms
+A*: length = 13, nodes = 33, time = 0.5848 ms
 Move 1: R
 Hex: 0x1723608459acdebf
 1 7 2 3 
@@ -344,7 +344,7 @@ Hex: 0x123456789abcdef0
 9 A B C 
 D E F    
 
-IDA*: length = 13, nodes = 43, time = 0.0128 ms
+IDA*: length = 13, nodes = 43, time = 0.0161 ms
 
 ================================================
 Position: 0723168459ACDEBF
@@ -356,8 +356,8 @@ Hex: 0x0723168459acdebf
 5 9 A C 
 D E B F 
 
-BFS (bidirectional): length = 14, nodes = 404, time = 0.0469 ms
-A*: length = 14, nodes = 38, time = 0.5935 ms
+BFS (bidirectional): length = 14, nodes = 404, time = 0.0574 ms
+A*: length = 14, nodes = 34, time = 0.7422 ms
 Move 1: D
 Hex: 0x1723068459acdebf
 1 7 2 3 
@@ -365,70 +365,70 @@ Hex: 0x1723068459acdebf
 5 9 A C 
 D E B F 
 
-Move 2: R
-Hex: 0x1723608459acdebf
+Move 2: D
+Hex: 0x1723568409acdebf
 1 7 2 3 
-6    8 4 
-5 9 A C 
-D E B F 
-
-Move 3: U
-Hex: 0x1023678459acdebf
-1    2 3 
-6 7 8 4 
-5 9 A C 
-D E B F 
-
-Move 4: R
-Hex: 0x1203678459acdebf
-1 2    3 
-6 7 8 4 
-5 9 A C 
-D E B F 
-
-Move 5: R
-Hex: 0x1230678459acdebf
-1 2 3    
-6 7 8 4 
-5 9 A C 
-D E B F 
-
-Move 6: D
-Hex: 0x1234678059acdebf
-1 2 3 4 
-6 7 8    
-5 9 A C 
-D E B F 
-
-Move 7: L
-Hex: 0x1234670859acdebf
-1 2 3 4 
-6 7    8 
-5 9 A C 
-D E B F 
-
-Move 8: L
-Hex: 0x1234607859acdebf
-1 2 3 4 
-6    7 8 
-5 9 A C 
-D E B F 
-
-Move 9: L
-Hex: 0x1234067859acdebf
-1 2 3 4 
-   6 7 8 
-5 9 A C 
-D E B F 
-
-Move 10: D
-Hex: 0x1234567809acdebf
-1 2 3 4 
-5 6 7 8 
+5 6 8 4 
    9 A C 
 D E B F 
 
-Move 11: R
+Move 3: R
+Hex: 0x1723568490acdebf
+1 7 2 3 
+5 6 8 4 
+9    A C 
+D E B F 
+
+Move 4: U
+Hex: 0x1723508496acdebf
+1 7 2 3 
+5    8 4 
+9 6 A C 
+D E B F 
+
+Move 5: U
+Hex: 0x1023578496acdebf
+1    2 3 
+5 7 8 4 
+9 6 A C 
+D E B F 
+
+Move 6: R
+Hex: 0x1203578496acdebf
+1 2    3 
+5 7 8 4 
+9 6 A C 
+D E B F 
+
+Move 7: R
+Hex: 0x1230578496acdebf
+1 2 3    
+5 7 8 4 
+9 6 A C 
+D E B F 
+
+Move 8: D
+Hex: 0x1234578096acdebf
+1 2 3 4 
+5 7 8    
+9 6 A C 
+D E B F 
+
+Move 9: L
+Hex: 0x1234570896acdebf
+1 2 3 4 
+5 7    8 
+9 6 A C 
+D E B F 
+
+Move 10: L
+Hex: 0x1234507896acdebf
+1 2 3 4 
+5    7 8 
+9 6 A C 
+D E B F 
+
+Move 11: D
 Hex: 0x1234567890acdebf
 1 2 3 4 
 5 6 7 8 
@@ -456,7 +456,7 @@ Hex: 0x123456789abcdef0
 9 A B C 
 D E F    
 
-IDA*: length = 14, nodes = 43, time = 0.0077 ms
+IDA*: length = 14, nodes = 43, time = 0.0135 ms
 
 ================================================
 Position: 7023168459ACDEBF
@@ -468,8 +468,8 @@ Hex: 0x7023168459acdebf
 5 9 A C 
 D E B F 
 
-BFS (bidirectional): length = 15, nodes = 670, time = 0.0952 ms
-A*: length = 15, nodes = 46, time = 0.7253 ms
+BFS (bidirectional): length = 15, nodes = 670, time = 0.1369 ms
+A*: length = 15, nodes = 39, time = 0.58 ms
 Move 1: L
 Hex: 0x0723168459acdebf
    7 2 3 
@@ -484,70 +484,70 @@ Hex: 0x1723068459acdebf
 5 9 A C 
 D E B F 
 
-Move 3: R
-Hex: 0x1723608459acdebf
+Move 3: D
+Hex: 0x1723568409acdebf
 1 7 2 3 
-6    8 4 
-5 9 A C 
-D E B F 
-
-Move 4: U
-Hex: 0x1023678459acdebf
-1    2 3 
-6 7 8 4 
-5 9 A C 
-D E B F 
-
-Move 5: R
-Hex: 0x1203678459acdebf
-1 2    3 
-6 7 8 4 
-5 9 A C 
-D E B F 
-
-Move 6: R
-Hex: 0x1230678459acdebf
-1 2 3    
-6 7 8 4 
-5 9 A C 
-D E B F 
-
-Move 7: D
-Hex: 0x1234678059acdebf
-1 2 3 4 
-6 7 8    
-5 9 A C 
-D E B F 
-
-Move 8: L
-Hex: 0x1234670859acdebf
-1 2 3 4 
-6 7    8 
-5 9 A C 
-D E B F 
-
-Move 9: L
-Hex: 0x1234607859acdebf
-1 2 3 4 
-6    7 8 
-5 9 A C 
-D E B F 
-
-Move 10: L
-Hex: 0x1234067859acdebf
-1 2 3 4 
-   6 7 8 
-5 9 A C 
-D E B F 
-
-Move 11: D
-Hex: 0x1234567809acdebf
-1 2 3 4 
-5 6 7 8 
+5 6 8 4 
    9 A C 
 D E B F 
 
-Move 12: R
+Move 4: R
+Hex: 0x1723568490acdebf
+1 7 2 3 
+5 6 8 4 
+9    A C 
+D E B F 
+
+Move 5: U
+Hex: 0x1723508496acdebf
+1 7 2 3 
+5    8 4 
+9 6 A C 
+D E B F 
+
+Move 6: U
+Hex: 0x1023578496acdebf
+1    2 3 
+5 7 8 4 
+9 6 A C 
+D E B F 
+
+Move 7: R
+Hex: 0x1203578496acdebf
+1 2    3 
+5 7 8 4 
+9 6 A C 
+D E B F 
+
+Move 8: R
+Hex: 0x1230578496acdebf
+1 2 3    
+5 7 8 4 
+9 6 A C 
+D E B F 
+
+Move 9: D
+Hex: 0x1234578096acdebf
+1 2 3 4 
+5 7 8    
+9 6 A C 
+D E B F 
+
+Move 10: L
+Hex: 0x1234570896acdebf
+1 2 3 4 
+5 7    8 
+9 6 A C 
+D E B F 
+
+Move 11: L
+Hex: 0x1234507896acdebf
+1 2 3 4 
+5    7 8 
+9 6 A C 
+D E B F 
+
+Move 12: D
 Hex: 0x1234567890acdebf
 1 2 3 4 
 5 6 7 8 
@@ -575,7 +575,7 @@ Hex: 0x123456789abcdef0
 9 A B C 
 D E F    
 
-IDA*: length = 15, nodes = 58, time = 0.0166 ms
+IDA*: length = 15, nodes = 50, time = 0.0121 ms
 
 ================================================
 Position: 7203168459ACDEBF
@@ -587,8 +587,8 @@ Hex: 0x7203168459acdebf
 5 9 A C 
 D E B F 
 
-BFS (bidirectional): length = 16, nodes = 950, time = 0.1556 ms
-A*: length = 16, nodes = 84, time = 0.7316 ms
+BFS (bidirectional): length = 16, nodes = 950, time = 0.1408 ms
+A*: length = 16, nodes = 62, time = 0.5838 ms
 Move 1: L
 Hex: 0x7023168459acdebf
 7    2 3 
@@ -610,70 +610,70 @@ Hex: 0x1723068459acdebf
 5 9 A C 
 D E B F 
 
-Move 4: D
-Hex: 0x1723568409acdebf
+Move 4: R
+Hex: 0x1723608459acdebf
 1 7 2 3 
-5 6 8 4 
-   9 A C 
+6    8 4 
+5 9 A C 
 D E B F 
 
-Move 5: R
-Hex: 0x1723568490acdebf
-1 7 2 3 
-5 6 8 4 
-9    A C 
-D E B F 
-
-Move 6: U
-Hex: 0x1723508496acdebf
-1 7 2 3 
-5    8 4 
-9 6 A C 
-D E B F 
-
-Move 7: U
-Hex: 0x1023578496acdebf
+Move 5: U
+Hex: 0x1023678459acdebf
 1    2 3 
-5 7 8 4 
-9 6 A C 
+6 7 8 4 
+5 9 A C 
 D E B F 
 
-Move 8: R
-Hex: 0x1203578496acdebf
+Move 6: R
+Hex: 0x1203678459acdebf
 1 2    3 
-5 7 8 4 
-9 6 A C 
+6 7 8 4 
+5 9 A C 
 D E B F 
 
-Move 9: R
-Hex: 0x1230578496acdebf
+Move 7: R
+Hex: 0x1230678459acdebf
 1 2 3    
-5 7 8 4 
-9 6 A C 
+6 7 8 4 
+5 9 A C 
 D E B F 
 
-Move 10: D
-Hex: 0x1234578096acdebf
+Move 8: D
+Hex: 0x1234678059acdebf
 1 2 3 4 
-5 7 8    
-9 6 A C 
+6 7 8    
+5 9 A C 
+D E B F 
+
+Move 9: L
+Hex: 0x1234670859acdebf
+1 2 3 4 
+6 7    8 
+5 9 A C 
+D E B F 
+
+Move 10: L
+Hex: 0x1234607859acdebf
+1 2 3 4 
+6    7 8 
+5 9 A C 
 D E B F 
 
 Move 11: L
-Hex: 0x1234570896acdebf
+Hex: 0x1234067859acdebf
 1 2 3 4 
-5 7    8 
-9 6 A C 
+   6 7 8 
+5 9 A C 
 D E B F 
 
-Move 12: L
-Hex: 0x1234507896acdebf
+Move 12: D
+Hex: 0x1234567809acdebf
 1 2 3 4 
-5    7 8 
-9 6 A C 
+5 6 7 8 
+   9 A C 
 D E B F 
 
-Move 13: D
+Move 13: R
 Hex: 0x1234567890acdebf
 1 2 3 4 
 5 6 7 8 
@@ -701,7 +701,7 @@ Hex: 0x123456789abcdef0
 9 A B C 
 D E F    
 
-IDA*: length = 16, nodes = 100, time = 0.0219 ms
+IDA*: length = 16, nodes = 63, time = 0.0155 ms
 
 ================================================
 Position: 7283160459ACDEBF
@@ -713,8 +713,8 @@ Hex: 0x7283160459acdebf
 5 9 A C 
 D E B F 
 
-BFS (bidirectional): length = 17, nodes = 1559, time = 0.2259 ms
-A*: length = 17, nodes = 111, time = 0.7689 ms
+BFS (bidirectional): length = 17, nodes = 1559, time = 0.2219 ms
+A*: length = 17, nodes = 75, time = 0.5861 ms
 Move 1: U
 Hex: 0x7203168459acdebf
 7 2    3 
@@ -834,7 +834,7 @@ Hex: 0x123456789abcdef0
 9 A B C 
 D E F    
 
-IDA*: length = 17, nodes = 100, time = 0.0223 ms
+IDA*: length = 17, nodes = 63, time = 0.015 ms
 
 ================================================
 Position: 7283106459ACDEBF
@@ -846,8 +846,8 @@ Hex: 0x7283106459acdebf
 5 9 A C 
 D E B F 
 
-BFS (bidirectional): length = 18, nodes = 2321, time = 0.4264 ms
-A*: length = 18, nodes = 161, time = 0.7711 ms
+BFS (bidirectional): length = 18, nodes = 2321, time = 0.3194 ms
+A*: length = 18, nodes = 104, time = 0.6828 ms
 Move 1: R
 Hex: 0x7283160459acdebf
 7 2 8 3 
@@ -883,70 +883,70 @@ Hex: 0x1723068459acdebf
 5 9 A C 
 D E B F 
 
-Move 6: D
-Hex: 0x1723568409acdebf
+Move 6: R
+Hex: 0x1723608459acdebf
 1 7 2 3 
-5 6 8 4 
-   9 A C 
+6    8 4 
+5 9 A C 
 D E B F 
 
-Move 7: R
-Hex: 0x1723568490acdebf
-1 7 2 3 
-5 6 8 4 
-9    A C 
-D E B F 
-
-Move 8: U
-Hex: 0x1723508496acdebf
-1 7 2 3 
-5    8 4 
-9 6 A C 
-D E B F 
-
-Move 9: U
-Hex: 0x1023578496acdebf
+Move 7: U
+Hex: 0x1023678459acdebf
 1    2 3 
-5 7 8 4 
-9 6 A C 
+6 7 8 4 
+5 9 A C 
 D E B F 
 
-Move 10: R
-Hex: 0x1203578496acdebf
+Move 8: R
+Hex: 0x1203678459acdebf
 1 2    3 
-5 7 8 4 
-9 6 A C 
+6 7 8 4 
+5 9 A C 
 D E B F 
 
-Move 11: R
-Hex: 0x1230578496acdebf
+Move 9: R
+Hex: 0x1230678459acdebf
 1 2 3    
-5 7 8 4 
-9 6 A C 
+6 7 8 4 
+5 9 A C 
 D E B F 
 
-Move 12: D
-Hex: 0x1234578096acdebf
+Move 10: D
+Hex: 0x1234678059acdebf
 1 2 3 4 
-5 7 8    
-9 6 A C 
+6 7 8    
+5 9 A C 
+D E B F 
+
+Move 11: L
+Hex: 0x1234670859acdebf
+1 2 3 4 
+6 7    8 
+5 9 A C 
+D E B F 
+
+Move 12: L
+Hex: 0x1234607859acdebf
+1 2 3 4 
+6    7 8 
+5 9 A C 
 D E B F 
 
 Move 13: L
-Hex: 0x1234570896acdebf
+Hex: 0x1234067859acdebf
 1 2 3 4 
-5 7    8 
-9 6 A C 
+   6 7 8 
+5 9 A C 
 D E B F 
 
-Move 14: L
-Hex: 0x1234507896acdebf
+Move 14: D
+Hex: 0x1234567809acdebf
 1 2 3 4 
-5    7 8 
-9 6 A C 
+5 6 7 8 
+   9 A C 
 D E B F 
 
-Move 15: D
+Move 15: R
 Hex: 0x1234567890acdebf
 1 2 3 4 
 5 6 7 8 
@@ -974,7 +974,7 @@ Hex: 0x123456789abcdef0
 9 A B C 
 D E F    
 
-IDA*: length = 18, nodes = 306, time = 0.0771 ms
+IDA*: length = 18, nodes = 169, time = 0.0472 ms
 
 ================================================
 Position: 12345678A0BE9FCD
@@ -986,8 +986,8 @@ Hex: 0x12345678a0be9fcd
 A    B E 
 9 F C D 
 
-BFS (bidirectional): length = 19, nodes = 3267, time = 0.4735 ms
-A*: length = 19, nodes = 202, time = 0.7432 ms
+BFS (bidirectional): length = 19, nodes = 3267, time = 0.5203 ms
+A*: length = 19, nodes = 171, time = 1.0061 ms
 Move 1: R
 Hex: 0x12345678ab0e9fcd
 1 2 3 4 
@@ -1121,7 +1121,7 @@ Hex: 0x123456789abcdef0
 9 A B C 
 D E F    
 
-IDA*: length = 19, nodes = 486, time = 0.1174 ms
+IDA*: length = 19, nodes = 447, time = 0.1268 ms
 
 ================================================
 Position: 51247308A6BE9FCD
@@ -1133,8 +1133,8 @@ Hex: 0x51247308a6be9fcd
 A 6 B E 
 9 F C D 
 
-BFS (bidirectional): length = 27, nodes = 55669, time = 9.4757 ms
-A*: length = 27, nodes = 873, time = 1.0281 ms
+BFS (bidirectional): length = 27, nodes = 55669, time = 9.7868 ms
+A*: length = 27, nodes = 777, time = 1.1529 ms
 Move 1: L
 Hex: 0x51247038a6be9fcd
 5 1 2 4 
@@ -1177,56 +1177,56 @@ Hex: 0x12345708a6be9fcd
 A 6 B E 
 9 F C D 
 
-Move 7: D
-Hex: 0x123457b8a60e9fcd
+Move 7: L
+Hex: 0x12345078a6be9fcd
 1 2 3 4 
-5 7 B 8 
-A 6    E 
+5    7 8 
+A 6 B E 
 9 F C D 
 
 Move 8: D
-Hex: 0x123457b8a6ce9f0d
+Hex: 0x12345678a0be9fcd
 1 2 3 4 
-5 7 B 8 
-A 6 C E 
-9 F    D 
+5 6 7 8 
+A    B E 
+9 F C D 
 
 Move 9: R
-Hex: 0x123457b8a6ce9fd0
+Hex: 0x12345678ab0e9fcd
 1 2 3 4 
-5 7 B 8 
-A 6 C E 
+5 6 7 8 
+A B    E 
+9 F C D 
+
+Move 10: D
+Hex: 0x12345678abce9f0d
+1 2 3 4 
+5 6 7 8 
+A B C E 
+9 F    D 
+
+Move 11: R
+Hex: 0x12345678abce9fd0
+1 2 3 4 
+5 6 7 8 
+A B C E 
 9 F D    
 
-Move 10: U
-Hex: 0x123457b8a6c09fde
-1 2 3 4 
-5 7 B 8 
-A 6 C    
-9 F D E 
-
-Move 11: L
-Hex: 0x123457b8a60c9fde
-1 2 3 4 
-5 7 B 8 
-A 6    C 
-9 F D E 
-
 Move 12: U
-Hex: 0x12345708a6bc9fde
+Hex: 0x12345678abc09fde
 1 2 3 4 
-5 7    8 
-A 6 B C 
+5 6 7 8 
+A B C    
 9 F D E 
 
 Move 13: L
-Hex: 0x12345078a6bc9fde
+Hex: 0x12345678ab0c9fde
 1 2 3 4 
-5    7 8 
-A 6 B C 
+5 6 7 8 
+A B    C 
 9 F D E 
 
-Move 14: D
+Move 14: L
 Hex: 0x12345678a0bc9fde
 1 2 3 4 
 5 6 7 8 
@@ -1324,7 +1324,7 @@ Hex: 0x123456789abcdef0
 9 A B C 
 D E F    
 
-IDA*: length = 27, nodes = 841, time = 0.1952 ms
+IDA*: length = 27, nodes = 780, time = 0.1989 ms
 
 ================================================
 Position: F2345678A0BE91DC
@@ -1336,8 +1336,8 @@ F 2 3 4
 A    B E 
 9 1 D C 
 
-BFS (bidirectional): length = 33, nodes = 433383, time = 79.3466 ms
-A*: length = 33, nodes = 25314, time = 11.2897 ms
+BFS (bidirectional): length = 33, nodes = 433383, time = 103.3 ms
+A*: length = 33, nodes = 12392, time = 7.7053 ms
 Move 1: D
 Hex: 0xf2345678a1be90dc
 F 2 3 4 
@@ -1569,7 +1569,7 @@ Hex: 0x123456789abcdef0
 9 A B C 
 D E F    
 
-IDA*: length = 33, nodes = 64610, time = 12.3215 ms
+IDA*: length = 33, nodes = 28625, time = 6.7836 ms
 
 ================================================
 Position: 75123804A6BE9FCD
@@ -1581,8 +1581,8 @@ Hex: 0x75123804a6be9fcd
 A 6 B E 
 9 F C D 
 
-BFS (bidirectional): length = 35, nodes = 848659, time = 196.906 ms
-A*: length = 35, nodes = 2264, time = 1.6816 ms
+BFS (bidirectional): length = 35, nodes = 848659, time = 224.627 ms
+A*: length = 35, nodes = 2010, time = 1.5398 ms
 Move 1: L
 Hex: 0x75123084a6be9fcd
 7 5 1 2 
@@ -1681,56 +1681,56 @@ Hex: 0x12345708a6be9fcd
 A 6 B E 
 9 F C D 
 
-Move 15: D
-Hex: 0x123457b8a60e9fcd
+Move 15: L
+Hex: 0x12345078a6be9fcd
 1 2 3 4 
-5 7 B 8 
-A 6    E 
+5    7 8 
+A 6 B E 
 9 F C D 
 
 Move 16: D
-Hex: 0x123457b8a6ce9f0d
+Hex: 0x12345678a0be9fcd
 1 2 3 4 
-5 7 B 8 
-A 6 C E 
-9 F    D 
+5 6 7 8 
+A    B E 
+9 F C D 
 
 Move 17: R
-Hex: 0x123457b8a6ce9fd0
+Hex: 0x12345678ab0e9fcd
 1 2 3 4 
-5 7 B 8 
-A 6 C E 
+5 6 7 8 
+A B    E 
+9 F C D 
+
+Move 18: D
+Hex: 0x12345678abce9f0d
+1 2 3 4 
+5 6 7 8 
+A B C E 
+9 F    D 
+
+Move 19: R
+Hex: 0x12345678abce9fd0
+1 2 3 4 
+5 6 7 8 
+A B C E 
 9 F D    
 
-Move 18: U
-Hex: 0x123457b8a6c09fde
-1 2 3 4 
-5 7 B 8 
-A 6 C    
-9 F D E 
-
-Move 19: L
-Hex: 0x123457b8a60c9fde
-1 2 3 4 
-5 7 B 8 
-A 6    C 
-9 F D E 
-
 Move 20: U
-Hex: 0x12345708a6bc9fde
+Hex: 0x12345678abc09fde
 1 2 3 4 
-5 7    8 
-A 6 B C 
+5 6 7 8 
+A B C    
 9 F D E 
 
 Move 21: L
-Hex: 0x12345078a6bc9fde
+Hex: 0x12345678ab0c9fde
 1 2 3 4 
-5    7 8 
-A 6 B C 
+5 6 7 8 
+A B    C 
 9 F D E 
 
-Move 22: D
+Move 22: L
 Hex: 0x12345678a0bc9fde
 1 2 3 4 
 5 6 7 8 
@@ -1828,7 +1828,7 @@ Hex: 0x123456789abcdef0
 9 A B C 
 D E F    
 
-IDA*: length = 35, nodes = 1959, time = 0.4063 ms
+IDA*: length = 35, nodes = 1810, time = 0.5491 ms
 
 ================================================
 Position: 75AB2C416D389F0E
@@ -1841,288 +1841,288 @@ Hex: 0x75ab2c416d389f0e
 9 F    E 
 
 BFS: skipped (expected length > 35)
-A*: length = 45, nodes = 211970, time = 108.713 ms
-Move 1: R
-Hex: 0x75ab2c416d389fe0
+A*: length = 45, nodes = 131193, time = 66.8059 ms
+Move 1: L
+Hex: 0x75ab2c416d3890fe
 7 5 A B 
 2 C 4 1 
 6 D 3 8 
-9 F E    
+9    F E 
 
 Move 2: U
-Hex: 0x75ab2c416d309fe8
+Hex: 0x75ab2c4160389dfe
 7 5 A B 
 2 C 4 1 
-6 D 3    
-9 F E 8 
+6    3 8 
+9 D F E 
 
 Move 3: L
-Hex: 0x75ab2c416d039fe8
+Hex: 0x75ab2c4106389dfe
 7 5 A B 
 2 C 4 1 
-6 D    3 
-9 F E 8 
+   6 3 8 
+9 D F E 
 
-Move 4: D
-Hex: 0x75ab2c416de39f08
+Move 4: U
+Hex: 0x75ab0c4126389dfe
 7 5 A B 
-2 C 4 1 
-6 D E 3 
-9 F    8 
+   C 4 1 
+2 6 3 8 
+9 D F E 
 
-Move 5: L
-Hex: 0x75ab2c416de390f8
-7 5 A B 
-2 C 4 1 
-6 D E 3 
-9    F 8 
+Move 5: U
+Hex: 0x05ab7c4126389dfe
+   5 A B 
+7 C 4 1 
+2 6 3 8 
+9 D F E 
 
-Move 6: U
-Hex: 0x75ab2c4160e39df8
-7 5 A B 
-2 C 4 1 
-6    E 3 
-9 D F 8 
+Move 6: R
+Hex: 0x50ab7c4126389dfe
+5    A B 
+7 C 4 1 
+2 6 3 8 
+9 D F E 
 
-Move 7: U
-Hex: 0x75ab20416ce39df8
-7 5 A B 
-2    4 1 
-6 C E 3 
-9 D F 8 
+Move 7: R
+Hex: 0x5a0b7c4126389dfe
+5 A    B 
+7 C 4 1 
+2 6 3 8 
+9 D F E 
 
-Move 8: U
-Hex: 0x70ab25416ce39df8
-7    A B 
-2 5 4 1 
-6 C E 3 
-9 D F 8 
+Move 8: D
+Hex: 0x5a4b7c0126389dfe
+5 A 4 B 
+7 C    1 
+2 6 3 8 
+9 D F E 
 
 Move 9: R
-Hex: 0x7a0b25416ce39df8
-7 A    B 
-2 5 4 1 
-6 C E 3 
-9 D F 8 
+Hex: 0x5a4b7c1026389dfe
+5 A 4 B 
+7 C 1    
+2 6 3 8 
+9 D F E 
 
-Move 10: D
-Hex: 0x7a4b25016ce39df8
-7 A 4 B 
-2 5    1 
-6 C E 3 
-9 D F 8 
+Move 10: U
+Hex: 0x5a407c1b26389dfe
+5 A 4    
+7 C 1 B 
+2 6 3 8 
+9 D F E 
 
-Move 11: R
-Hex: 0x7a4b25106ce39df8
-7 A 4 B 
-2 5 1    
-6 C E 3 
-9 D F 8 
+Move 11: L
+Hex: 0x5a047c1b26389dfe
+5 A    4 
+7 C 1 B 
+2 6 3 8 
+9 D F E 
 
 Move 12: D
-Hex: 0x7a4b25136ce09df8
-7 A 4 B 
-2 5 1 3 
-6 C E    
-9 D F 8 
+Hex: 0x5a147c0b26389dfe
+5 A 1 4 
+7 C    B 
+2 6 3 8 
+9 D F E 
 
 Move 13: D
-Hex: 0x7a4b25136ce89df0
-7 A 4 B 
-2 5 1 3 
-6 C E 8 
-9 D F    
+Hex: 0x5a147c3b26089dfe
+5 A 1 4 
+7 C 3 B 
+2 6    8 
+9 D F E 
 
-Move 14: L
-Hex: 0x7a4b25136ce89d0f
-7 A 4 B 
-2 5 1 3 
-6 C E 8 
-9 D    F 
+Move 14: D
+Hex: 0x5a147c3b26f89d0e
+5 A 1 4 
+7 C 3 B 
+2 6 F 8 
+9 D    E 
 
-Move 15: U
-Hex: 0x7a4b25136c089def
-7 A 4 B 
-2 5 1 3 
-6 C    8 
-9 D E F 
+Move 15: L
+Hex: 0x5a147c3b26f890de
+5 A 1 4 
+7 C 3 B 
+2 6 F 8 
+9    D E 
 
-Move 16: L
-Hex: 0x7a4b251360c89def
-7 A 4 B 
-2 5 1 3 
-6    C 8 
-9 D E F 
+Move 16: U
+Hex: 0x5a147c3b20f896de
+5 A 1 4 
+7 C 3 B 
+2    F 8 
+9 6 D E 
 
 Move 17: U
-Hex: 0x7a4b201365c89def
-7 A 4 B 
-2    1 3 
-6 5 C 8 
-9 D E F 
+Hex: 0x5a14703b2cf896de
+5 A 1 4 
+7    3 B 
+2 C F 8 
+9 6 D E 
 
-Move 18: R
-Hex: 0x7a4b210365c89def
-7 A 4 B 
-2 1    3 
-6 5 C 8 
-9 D E F 
+Move 18: U
+Hex: 0x50147a3b2cf896de
+5    1 4 
+7 A 3 B 
+2 C F 8 
+9 6 D E 
 
 Move 19: R
-Hex: 0x7a4b213065c89def
-7 A 4 B 
-2 1 3    
-6 5 C 8 
-9 D E F 
+Hex: 0x51047a3b2cf896de
+5 1    4 
+7 A 3 B 
+2 C F 8 
+9 6 D E 
 
-Move 20: U
-Hex: 0x7a40213b65c89def
-7 A 4    
-2 1 3 B 
-6 5 C 8 
-9 D E F 
+Move 20: D
+Hex: 0x51347a0b2cf896de
+5 1 3 4 
+7 A    B 
+2 C F 8 
+9 6 D E 
 
-Move 21: L
-Hex: 0x7a04213b65c89def
-7 A    4 
-2 1 3 B 
-6 5 C 8 
-9 D E F 
+Move 21: R
+Hex: 0x51347ab02cf896de
+5 1 3 4 
+7 A B    
+2 C F 8 
+9 6 D E 
 
-Move 22: L
-Hex: 0x70a4213b65c89def
-7    A 4 
-2 1 3 B 
-6 5 C 8 
-9 D E F 
+Move 22: D
+Hex: 0x51347ab82cf096de
+5 1 3 4 
+7 A B 8 
+2 C F    
+9 6 D E 
 
 Move 23: L
-Hex: 0x07a4213b65c89def
-   7 A 4 
-2 1 3 B 
-6 5 C 8 
-9 D E F 
+Hex: 0x51347ab82c0f96de
+5 1 3 4 
+7 A B 8 
+2 C    F 
+9 6 D E 
 
-Move 24: D
-Hex: 0x27a4013b65c89def
-2 7 A 4 
-   1 3 B 
-6 5 C 8 
-9 D E F 
+Move 24: L
+Hex: 0x51347ab820cf96de
+5 1 3 4 
+7 A B 8 
+2    C F 
+9 6 D E 
 
-Move 25: R
-Hex: 0x27a4103b65c89def
-2 7 A 4 
-1    3 B 
-6 5 C 8 
-9 D E F 
+Move 25: U
+Hex: 0x513470b82acf96de
+5 1 3 4 
+7    B 8 
+2 A C F 
+9 6 D E 
 
-Move 26: U
-Hex: 0x20a4173b65c89def
-2    A 4 
-1 7 3 B 
-6 5 C 8 
-9 D E F 
+Move 26: L
+Hex: 0x513407b82acf96de
+5 1 3 4 
+   7 B 8 
+2 A C F 
+9 6 D E 
 
-Move 27: R
-Hex: 0x2a04173b65c89def
-2 A    4 
-1 7 3 B 
-6 5 C 8 
-9 D E F 
+Move 27: D
+Hex: 0x513427b80acf96de
+5 1 3 4 
+2 7 B 8 
+   A C F 
+9 6 D E 
 
-Move 28: D
-Hex: 0x2a34170b65c89def
-2 A 3 4 
-1 7    B 
-6 5 C 8 
-9 D E F 
+Move 28: R
+Hex: 0x513427b8a0cf96de
+5 1 3 4 
+2 7 B 8 
+A    C F 
+9 6 D E 
 
-Move 29: R
-Hex: 0x2a3417b065c89def
-2 A 3 4 
-1 7 B    
-6 5 C 8 
-9 D E F 
+Move 29: D
+Hex: 0x513427b8a6cf90de
+5 1 3 4 
+2 7 B 8 
+A 6 C F 
+9    D E 
 
-Move 30: D
-Hex: 0x2a3417b865c09def
-2 A 3 4 
-1 7 B 8 
-6 5 C    
-9 D E F 
+Move 30: R
+Hex: 0x513427b8a6cf9d0e
+5 1 3 4 
+2 7 B 8 
+A 6 C F 
+9 D    E 
 
-Move 31: L
-Hex: 0x2a3417b8650c9def
-2 A 3 4 
-1 7 B 8 
-6 5    C 
-9 D E F 
+Move 31: R
+Hex: 0x513427b8a6cf9de0
+5 1 3 4 
+2 7 B 8 
+A 6 C F 
+9 D E    
 
 Move 32: U
-Hex: 0x2a34170865bc9def
-2 A 3 4 
-1 7    8 
-6 5 B C 
+Hex: 0x513427b8a6c09def
+5 1 3 4 
+2 7 B 8 
+A 6 C    
 9 D E F 
 
 Move 33: L
-Hex: 0x2a34107865bc9def
-2 A 3 4 
-1    7 8 
-6 5 B C 
+Hex: 0x513427b8a60c9def
+5 1 3 4 
+2 7 B 8 
+A 6    C 
 9 D E F 
 
 Move 34: U
-Hex: 0x20341a7865bc9def
-2    3 4 
-1 A 7 8 
-6 5 B C 
+Hex: 0x51342708a6bc9def
+5 1 3 4 
+2 7    8 
+A 6 B C 
 9 D E F 
 
 Move 35: L
-Hex: 0x02341a7865bc9def
-   2 3 4 
-1 A 7 8 
-6 5 B C 
+Hex: 0x51342078a6bc9def
+5 1 3 4 
+2    7 8 
+A 6 B C 
 9 D E F 
 
-Move 36: D
-Hex: 0x12340a7865bc9def
-1 2 3 4 
-   A 7 8 
-6 5 B C 
+Move 36: L
+Hex: 0x51340278a6bc9def
+5 1 3 4 
+   2 7 8 
+A 6 B C 
 9 D E F 
 
-Move 37: D
-Hex: 0x12346a7805bc9def
-1 2 3 4 
-6 A 7 8 
-   5 B C 
+Move 37: U
+Hex: 0x01345278a6bc9def
+   1 3 4 
+5 2 7 8 
+A 6 B C 
 9 D E F 
 
 Move 38: R
-Hex: 0x12346a7850bc9def
-1 2 3 4 
-6 A 7 8 
-5    B C 
+Hex: 0x10345278a6bc9def
+1    3 4 
+5 2 7 8 
+A 6 B C 
 9 D E F 
 
-Move 39: U
-Hex: 0x123460785abc9def
+Move 39: D
+Hex: 0x12345078a6bc9def
 1 2 3 4 
-6    7 8 
-5 A B C 
+5    7 8 
+A 6 B C 
 9 D E F 
 
-Move 40: L
-Hex: 0x123406785abc9def
+Move 40: D
+Hex: 0x12345678a0bc9def
 1 2 3 4 
-   6 7 8 
-5 A B C 
+5 6 7 8 
+A    B C 
 9 D E F 
 
-Move 41: D
+Move 41: L
 Hex: 0x123456780abc9def
 1 2 3 4 
 5 6 7 8 
@@ -2157,7 +2157,7 @@ Hex: 0x123456789abcdef0
 9 A B C 
 D E F    
 
-IDA*: length = 45, nodes = 474218, time = 89.4877 ms
+IDA*: length = 45, nodes = 286765, time = 58.68 ms
 
 ================================================
 Position: 04582E1DF79BCA36
@@ -2170,7 +2170,7 @@ F 7 9 B
 C A 3 6 
 
 BFS: skipped (expected length > 35)
-A*: length = 48, nodes = 26477, time = 11.9526 ms
+A*: length = 48, nodes = 16590, time = 7.6908 ms
 Move 1: D
 Hex: 0x24580e1df79bca36
 2 4 5 8 
@@ -2507,7 +2507,7 @@ Hex: 0x123456789abcdef0
 9 A B C 
 D E F    
 
-IDA*: length = 48, nodes = 59578, time = 10.9184 ms
+IDA*: length = 48, nodes = 37153, time = 7.4278 ms
 
 ================================================
 Position: FE169B4C0A73D852
@@ -2520,7 +2520,7 @@ F E 1 6
 D 8 5 2 
 
 BFS: skipped (expected length > 35)
-A*: length = 52, nodes = 2628671, time = 1730.09 ms
+A*: length = 52, nodes = 2315017, time = 1710.94 ms
 Move 1: R
 Hex: 0xfe169b4ca073d852
 F E 1 6 
@@ -2885,7 +2885,7 @@ Hex: 0x123456789abcdef0
 9 A B C 
 D E F    
 
-IDA*: length = 52, nodes = 7876225, time = 1407.86 ms
+IDA*: length = 52, nodes = 6956912, time = 1347.16 ms
 
 ================================================
 Position: D79F2E8A45106C3B
@@ -2898,7 +2898,7 @@ D 7 9 F
 6 C 3 B 
 
 BFS: skipped (expected length > 35)
-A*: length = 55, nodes = 981650, time = 555.79 ms
+A*: length = 55, nodes = 257924, time = 124.077 ms
 Move 1: U
 Hex: 0xd79f2e80451a6c3b
 D 7 9 F 
@@ -3284,7 +3284,7 @@ Hex: 0x123456789abcdef0
 9 A B C 
 D E F    
 
-IDA*: length = 55, nodes = 1365083, time = 227.06 ms
+IDA*: length = 55, nodes = 301374, time = 54.8071 ms
 
 ================================================
 Position: DBE87A2C91F65034
@@ -3297,8 +3297,414 @@ D B E 8
 5    3 4 
 
 BFS: skipped (expected length > 35)
-A*: TIMEOUT, nodes = 13041664
-IDA*: length = 58, nodes = 25926252, time = 5099.26 ms
+A*: length = 58, nodes = 12241966, time = 9835.58 ms
+Move 1: L
+Hex: 0xdbe87a2c91f60534
+D B E 8 
+7 A 2 C 
+9 1 F 6 
+   5 3 4 
+
+Move 2: U
+Hex: 0xdbe87a2c01f69534
+D B E 8 
+7 A 2 C 
+   1 F 6 
+9 5 3 4 
+
+Move 3: U
+Hex: 0xdbe80a2c71f69534
+D B E 8 
+   A 2 C 
+7 1 F 6 
+9 5 3 4 
+
+Move 4: R
+Hex: 0xdbe8a02c71f69534
+D B E 8 
+A    2 C 
+7 1 F 6 
+9 5 3 4 
+
+Move 5: R
+Hex: 0xdbe8a20c71f69534
+D B E 8 
+A 2    C 
+7 1 F 6 
+9 5 3 4 
+
+Move 6: U
+Hex: 0xdb08a2ec71f69534
+D B    8 
+A 2 E C 
+7 1 F 6 
+9 5 3 4 
+
+Move 7: L
+Hex: 0xd0b8a2ec71f69534
+D    B 8 
+A 2 E C 
+7 1 F 6 
+9 5 3 4 
+
+Move 8: D
+Hex: 0xd2b8a0ec71f69534
+D 2 B 8 
+A    E C 
+7 1 F 6 
+9 5 3 4 
+
+Move 9: D
+Hex: 0xd2b8a1ec70f69534
+D 2 B 8 
+A 1 E C 
+7    F 6 
+9 5 3 4 
+
+Move 10: D
+Hex: 0xd2b8a1ec75f69034
+D 2 B 8 
+A 1 E C 
+7 5 F 6 
+9    3 4 
+
+Move 11: R
+Hex: 0xd2b8a1ec75f69304
+D 2 B 8 
+A 1 E C 
+7 5 F 6 
+9 3    4 
+
+Move 12: U
+Hex: 0xd2b8a1ec750693f4
+D 2 B 8 
+A 1 E C 
+7 5    6 
+9 3 F 4 
+
+Move 13: R
+Hex: 0xd2b8a1ec756093f4
+D 2 B 8 
+A 1 E C 
+7 5 6    
+9 3 F 4 
+
+Move 14: D
+Hex: 0xd2b8a1ec756493f0
+D 2 B 8 
+A 1 E C 
+7 5 6 4 
+9 3 F    
+
+Move 15: L
+Hex: 0xd2b8a1ec7564930f
+D 2 B 8 
+A 1 E C 
+7 5 6 4 
+9 3    F 
+
+Move 16: U
+Hex: 0xd2b8a1ec7504936f
+D 2 B 8 
+A 1 E C 
+7 5    4 
+9 3 6 F 
+
+Move 17: U
+Hex: 0xd2b8a10c75e4936f
+D 2 B 8 
+A 1    C 
+7 5 E 4 
+9 3 6 F 
+
+Move 18: U
+Hex: 0xd208a1bc75e4936f
+D 2    8 
+A 1 B C 
+7 5 E 4 
+9 3 6 F 
+
+Move 19: L
+Hex: 0xd028a1bc75e4936f
+D    2 8 
+A 1 B C 
+7 5 E 4 
+9 3 6 F 
+
+Move 20: D
+Hex: 0xd128a0bc75e4936f
+D 1 2 8 
+A    B C 
+7 5 E 4 
+9 3 6 F 
+
+Move 21: D
+Hex: 0xd128a5bc70e4936f
+D 1 2 8 
+A 5 B C 
+7    E 4 
+9 3 6 F 
+
+Move 22: D
+Hex: 0xd128a5bc73e4906f
+D 1 2 8 
+A 5 B C 
+7 3 E 4 
+9    6 F 
+
+Move 23: R
+Hex: 0xd128a5bc73e4960f
+D 1 2 8 
+A 5 B C 
+7 3 E 4 
+9 6    F 
+
+Move 24: U
+Hex: 0xd128a5bc730496ef
+D 1 2 8 
+A 5 B C 
+7 3    4 
+9 6 E F 
+
+Move 25: R
+Hex: 0xd128a5bc734096ef
+D 1 2 8 
+A 5 B C 
+7 3 4    
+9 6 E F 
+
+Move 26: U
+Hex: 0xd128a5b0734c96ef
+D 1 2 8 
+A 5 B    
+7 3 4 C 
+9 6 E F 
+
+Move 27: L
+Hex: 0xd128a50b734c96ef
+D 1 2 8 
+A 5    B 
+7 3 4 C 
+9 6 E F 
+
+Move 28: D
+Hex: 0xd128a54b730c96ef
+D 1 2 8 
+A 5 4 B 
+7 3    C 
+9 6 E F 
+
+Move 29: L
+Hex: 0xd128a54b703c96ef
+D 1 2 8 
+A 5 4 B 
+7    3 C 
+9 6 E F 
+
+Move 30: L
+Hex: 0xd128a54b073c96ef
+D 1 2 8 
+A 5 4 B 
+   7 3 C 
+9 6 E F 
+
+Move 31: U
+Hex: 0xd128054ba73c96ef
+D 1 2 8 
+   5 4 B 
+A 7 3 C 
+9 6 E F 
+
+Move 32: U
+Hex: 0x0128d54ba73c96ef
+   1 2 8 
+D 5 4 B 
+A 7 3 C 
+9 6 E F 
+
+Move 33: R
+Hex: 0x1028d54ba73c96ef
+1    2 8 
+D 5 4 B 
+A 7 3 C 
+9 6 E F 
+
+Move 34: R
+Hex: 0x1208d54ba73c96ef
+1 2    8 
+D 5 4 B 
+A 7 3 C 
+9 6 E F 
+
+Move 35: D
+Hex: 0x1248d50ba73c96ef
+1 2 4 8 
+D 5    B 
+A 7 3 C 
+9 6 E F 
+
+Move 36: D
+Hex: 0x1248d53ba70c96ef
+1 2 4 8 
+D 5 3 B 
+A 7    C 
+9 6 E F 
+
+Move 37: L
+Hex: 0x1248d53ba07c96ef
+1 2 4 8 
+D 5 3 B 
+A    7 C 
+9 6 E F 
+
+Move 38: D
+Hex: 0x1248d53ba67c90ef
+1 2 4 8 
+D 5 3 B 
+A 6 7 C 
+9    E F 
+
+Move 39: L
+Hex: 0x1248d53ba67c09ef
+1 2 4 8 
+D 5 3 B 
+A 6 7 C 
+   9 E F 
+
+Move 40: U
+Hex: 0x1248d53b067ca9ef
+1 2 4 8 
+D 5 3 B 
+   6 7 C 
+A 9 E F 
+
+Move 41: U
+Hex: 0x1248053bd67ca9ef
+1 2 4 8 
+   5 3 B 
+D 6 7 C 
+A 9 E F 
+
+Move 42: R
+Hex: 0x1248503bd67ca9ef
+1 2 4 8 
+5    3 B 
+D 6 7 C 
+A 9 E F 
+
+Move 43: D
+Hex: 0x1248563bd07ca9ef
+1 2 4 8 
+5 6 3 B 
+D    7 C 
+A 9 E F 
+
+Move 44: D
+Hex: 0x1248563bd97ca0ef
+1 2 4 8 
+5 6 3 B 
+D 9 7 C 
+A    E F 
+
+Move 45: L
+Hex: 0x1248563bd97c0aef
+1 2 4 8 
+5 6 3 B 
+D 9 7 C 
+   A E F 
+
+Move 46: U
+Hex: 0x1248563b097cdaef
+1 2 4 8 
+5 6 3 B 
+   9 7 C 
+D A E F 
+
+Move 47: R
+Hex: 0x1248563b907cdaef
+1 2 4 8 
+5 6 3 B 
+9    7 C 
+D A E F 
+
+Move 48: D
+Hex: 0x1248563b9a7cd0ef
+1 2 4 8 
+5 6 3 B 
+9 A 7 C 
+D    E F 
+
+Move 49: R
+Hex: 0x1248563b9a7cde0f
+1 2 4 8 
+5 6 3 B 
+9 A 7 C 
+D E    F 
+
+Move 50: R
+Hex: 0x1248563b9a7cdef0
+1 2 4 8 
+5 6 3 B 
+9 A 7 C 
+D E F    
+
+Move 51: U
+Hex: 0x1248563b9a70defc
+1 2 4 8 
+5 6 3 B 
+9 A 7    
+D E F C 
+
+Move 52: U
+Hex: 0x124856309a7bdefc
+1 2 4 8 
+5 6 3    
+9 A 7 B 
+D E F C 
+
+Move 53: U
+Hex: 0x124056389a7bdefc
+1 2 4    
+5 6 3 8 
+9 A 7 B 
+D E F C 
+
+Move 54: L
+Hex: 0x120456389a7bdefc
+1 2    4 
+5 6 3 8 
+9 A 7 B 
+D E F C 
+
+Move 55: D
+Hex: 0x123456089a7bdefc
+1 2 3 4 
+5 6    8 
+9 A 7 B 
+D E F C 
+
+Move 56: D
+Hex: 0x123456789a0bdefc
+1 2 3 4 
+5 6 7 8 
+9 A    B 
+D E F C 
+
+Move 57: R
+Hex: 0x123456789ab0defc
+1 2 3 4 
+5 6 7 8 
+9 A B    
+D E F C 
+
+Move 58: D
+Hex: 0x123456789abcdef0
+1 2 3 4 
+5 6 7 8 
+9 A B C 
+D E F    
+
+IDA*: length = 58, nodes = 17341317, time = 3565.84 ms
 
 ================================================
 Position: BAC0F478E19623D5
@@ -3311,11 +3717,11 @@ E 1 9 6
 2 3 D 5 
 
 BFS: skipped (expected length > 35)
-A*: TIMEOUT, nodes = 12984320
-IDA*: TIMEOUT, nodes = 53211177
+A*: TIMEOUT, nodes = 12648448
+IDA*: TIMEOUT, nodes = 51624028
 
 ========================================================================================
-Summary (heuristic = Manhattan+2*LC+CornerConflict, timeout = 10 s)
+Summary (heuristic = JS-style (Manh+LC+CornerConflict), timeout = 10 s)
 ========================================================================================
 Position          Exp.  BFS(bidi)                   A*                          IDA*                        
 ------------------------------------------------------------------------------------------------------------
@@ -3323,22 +3729,22 @@ Position          Exp.  BFS(bidi)                   A*                          
 F2345678A0BE91CD  uns.  n/a                         n/a                         n/a                         
 123456789ABCDEF0  0     0 (0n, 0.0ms)               0 (0n, 0.0ms)               0 (0n, 0.0ms)               
 1234067859ACDEBF  5     5 (11n, 0.0ms)              5 (6n, 0.6ms)               5 (12n, 0.0ms)              
-5134207896ACDEBF  8     8 (52n, 0.0ms)              8 (13n, 0.6ms)              8 (24n, 0.0ms)              
+5134207896ACDEBF  8     8 (52n, 0.0ms)              8 (13n, 0.7ms)              8 (24n, 0.0ms)              
 16245A3709C8DEBF  10    10 (97n, 0.0ms)             10 (11n, 0.6ms)             10 (20n, 0.0ms)             
 1723068459ACDEBF  13    13 (324n, 0.0ms)            13 (33n, 0.6ms)             13 (43n, 0.0ms)             
-0723168459ACDEBF  14    14 (404n, 0.0ms)            14 (38n, 0.6ms)             14 (43n, 0.0ms)             
-7023168459ACDEBF  15    15 (670n, 0.1ms)            15 (46n, 0.7ms)             15 (58n, 0.0ms)             
-7203168459ACDEBF  16    16 (950n, 0.2ms)            16 (84n, 0.7ms)             16 (100n, 0.0ms)            
-7283160459ACDEBF  17    17 (1559n, 0.2ms)           17 (111n, 0.8ms)            17 (100n, 0.0ms)            
-7283106459ACDEBF  18    18 (2321n, 0.4ms)           18 (161n, 0.8ms)            18 (306n, 0.1ms)            
-12345678A0BE9FCD  19    19 (3267n, 0.5ms)           19 (202n, 0.7ms)            19 (486n, 0.1ms)            
-51247308A6BE9FCD  27    27 (55669n, 9.5ms)          27 (873n, 1.0ms)            27 (841n, 0.2ms)            
-F2345678A0BE91DC  33    33 (433383n, 79.3ms)        33 (25314n, 11.3ms)         33 (64610n, 12.3ms)         
-75123804A6BE9FCD  35    35 (848659n, 196.9ms)       35 (2264n, 1.7ms)           35 (1959n, 0.4ms)           
-75AB2C416D389F0E  45    skipped                     45 (211970n, 108.7ms)       45 (474218n, 89.5ms)        
-04582E1DF79BCA36  48    skipped                     48 (26477n, 12.0ms)         48 (59578n, 10.9ms)         
-FE169B4C0A73D852  52    skipped                     52 (2628671n, 1730.1ms)     52 (7876225n, 1407.9ms)     
-D79F2E8A45106C3B  55    skipped                     55 (981650n, 555.8ms)       55 (1365083n, 227.1ms)      
-DBE87A2C91F65034  58    skipped                     TIMEOUT                     58 (25926252n, 5099.3ms)    
+0723168459ACDEBF  14    14 (404n, 0.1ms)            14 (34n, 0.7ms)             14 (43n, 0.0ms)             
+7023168459ACDEBF  15    15 (670n, 0.1ms)            15 (39n, 0.6ms)             15 (50n, 0.0ms)             
+7203168459ACDEBF  16    16 (950n, 0.1ms)            16 (62n, 0.6ms)             16 (63n, 0.0ms)             
+7283160459ACDEBF  17    17 (1559n, 0.2ms)           17 (75n, 0.6ms)             17 (63n, 0.0ms)             
+7283106459ACDEBF  18    18 (2321n, 0.3ms)           18 (104n, 0.7ms)            18 (169n, 0.0ms)            
+12345678A0BE9FCD  19    19 (3267n, 0.5ms)           19 (171n, 1.0ms)            19 (447n, 0.1ms)            
+51247308A6BE9FCD  27    27 (55669n, 9.8ms)          27 (777n, 1.2ms)            27 (780n, 0.2ms)            
+F2345678A0BE91DC  33    33 (433383n, 103.3ms)       33 (12392n, 7.7ms)          33 (28625n, 6.8ms)          
+75123804A6BE9FCD  35    35 (848659n, 224.6ms)       35 (2010n, 1.5ms)           35 (1810n, 0.5ms)           
+75AB2C416D389F0E  45    skipped                     45 (131193n, 66.8ms)        45 (286765n, 58.7ms)        
+04582E1DF79BCA36  48    skipped                     48 (16590n, 7.7ms)          48 (37153n, 7.4ms)          
+FE169B4C0A73D852  52    skipped                     52 (2315017n, 1710.9ms)     52 (6956912n, 1347.2ms)     
+D79F2E8A45106C3B  55    skipped                     55 (257924n, 124.1ms)       55 (301374n, 54.8ms)        
+DBE87A2C91F65034  58    skipped                     58 (12241966n, 9835.6ms)    58 (17341317n, 3565.8ms)    
 BAC0F478E19623D5  61    skipped                     TIMEOUT                     TIMEOUT                     
 ------------------------------------------------------------------------------------------------------------

@@ -10,6 +10,7 @@
 #include <string>
 #include <chrono>
 #include <sstream>
+#include <cstdlib>
 
 const std::uint64_t GOAL = 0x123456789ABCDEF0ULL;
 
@@ -29,8 +30,9 @@ inline bool timeIsUp()
     return false;
 }
 
-// 1=Hamming, 2=Manh+2*LC, 3=Manh+2*LC+CornerConflict
-int g_heuristicMode = 3;
+// 1=Hamming, 2=Manh+2*LC, 3=Manh+2*LC+CornerConflict (classic),
+// 4=CornerConflict only (classic), 5=JS-style (Manh+LC+corner-from-script)
+int g_heuristicMode = 5;
 
 // ---------- precomputed tables ----------
 static int manhTable[16][16];
@@ -180,9 +182,92 @@ inline int cornerConflict(std::uint64_t state)
     return cc;
 }
 
+// ---------- heuristic ported from the JS script ----------
+// Equivalent to JS "heuristicCornerConflict":
+//   Manhattan + linear conflicts + JS-specific corner checks.
+inline int heuristicFromScript(std::uint64_t state)
+{
+    int field[16];
+    for (int i = 0; i < 16; ++i)
+        field[i] = static_cast<int>((state >> (4 * (15 - i))) & 0xF);
+
+    bool rowConflict[16] = {};
+    bool colConflict[16] = {};
+    int t = 0;
+
+    for (int s = 0; s < 4; ++s)             // row
+    {
+        for (int n = 0; n < 4; ++n)         // col
+        {
+            int h = field[s * 4 + n];
+            if (!h) continue;
+            h -= 1;                         // 0-based tile index
+            const int f = h & 3;            // target col
+            const int l = h >> 2;           // target row
+
+            t += std::abs(l - s) + std::abs(f - n);
+
+            if (l == s)                     // tile in its target row
+            {
+                for (int u = n + 1; u < 4; ++u)
+                {
+                    int c = field[s * 4 + u];
+                    if (!c) continue;
+                    c -= 1;
+                    if ((c >> 2) == s && c < h)
+                    {
+                        t += 2;
+                        rowConflict[h] = true;
+                        rowConflict[c] = true;
+                    }
+                }
+            }
+            if (f == n)                     // tile in its target col
+            {
+                for (int u = s + 1; u < 4; ++u)
+                {
+                    int c = field[u * 4 + n];
+                    if (!c) continue;
+                    c -= 1;
+                    if ((c & 3) == n && c < h)
+                    {
+                        t += 2;
+                        colConflict[h] = true;
+                        colConflict[c] = true;
+                    }
+                }
+            }
+        }
+    }
+
+    // --- corner-specific checks (JS-specific) ---
+    // corner 3 (top-right; goal tile = 4)
+    if (field[3] != 4 && field[3] != 0)
+    {
+        if (!rowConflict[2] && field[2] == 3) t += 2;
+        if (!colConflict[7] && field[7] == 8) t += 2;
+    }
+    // corner 0 (top-left; goal tile = 1)
+    if (field[0] != 1 && field[0] != 0)
+    {
+        if (!rowConflict[1] && field[1] == 2) t += 2;
+        if (!colConflict[4] && field[4] == 5) t += 2;
+    }
+    // corner 12 (bottom-left; goal tile = 13)
+    if (field[12] != 13 && field[12] != 0)
+    {
+        if (!rowConflict[13] && field[13] == 14) t += 2;
+        if (!colConflict[8] && field[8] == 9) t += 2;
+    }
+
+    return t;
+}
+
 inline int heuristic(std::uint64_t state)
 {
     if (g_heuristicMode == 1) return hamming(state);
+    if (g_heuristicMode == 4) return cornerConflict(state);
+    if (g_heuristicMode == 5) return heuristicFromScript(state);
     int m = manhattan(state);
     if (g_heuristicMode >= 2) m += linearConflict(state);
     if (g_heuristicMode >= 3) m += cornerConflict(state);
@@ -767,6 +852,8 @@ int main(int argc, char** argv)
         (g_heuristicMode == 1) ? "Hamming" :
         (g_heuristicMode == 2) ? "Manhattan+2*LC" :
         (g_heuristicMode == 3) ? "Manhattan+2*LC+CornerConflict" :
+        (g_heuristicMode == 4) ? "CornerConflict only" :
+        (g_heuristicMode == 5) ? "JS-style (Manh+LC+CornerConflict)" :
         "Manhattan";
 
     const std::size_t BFS_NODE_LIMIT = 200000000;
