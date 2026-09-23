@@ -16,9 +16,6 @@
 
 const std::uint64_t GOAL = 0x123456789ABCDEF0ULL;
 
-// ============================================================
-//  timeout
-// ============================================================
 std::chrono::steady_clock::time_point g_deadline;
 bool g_timeoutEnabled = false;
 
@@ -28,9 +25,6 @@ inline bool timeIsUp()
     return std::chrono::steady_clock::now() >= g_deadline;
 }
 
-// ============================================================
-//  64-bit mixer hash
-// ============================================================
 struct Hash64
 {
     std::size_t operator()(std::uint64_t x) const noexcept
@@ -42,9 +36,6 @@ struct Hash64
     }
 };
 
-// ============================================================
-//  move tables
-// ============================================================
 static int  neighborPos[16][4];
 static char neighborMove[16][4];
 static int  neighborCnt[16];
@@ -91,11 +82,6 @@ inline int findBlank(std::uint64_t state)
     return -1;
 }
 
-// ============================================================
-//  THE heuristic — exactly JS heuristicCornerConflict:
-//  Manhattan + linear conflicts + corner checks
-//  (admissible, but NOT consistent)
-// ============================================================
 inline int heuristic(std::uint64_t state)
 {
     int field[16];
@@ -162,9 +148,6 @@ inline int heuristic(std::uint64_t state)
     return t;
 }
 
-// ============================================================
-//  solvability
-// ============================================================
 bool isSolvable(std::uint64_t state)
 {
     int seq[15], n = 0, blankRow = 0;
@@ -181,9 +164,6 @@ bool isSolvable(std::uint64_t state)
     return (inv + (3 - blankRow)) % 2 == 0;
 }
 
-// ============================================================
-//  output
-// ============================================================
 char tileChar(int v)
 {
     return v < 10 ? (char)('0' + v) : (char)('A' + v - 10);
@@ -206,9 +186,6 @@ void printBoard(std::uint64_t state, std::ostream& os)
     os << '\n';
 }
 
-// ============================================================
-//  Node inside deque; parent = index in the same deque.
-// ============================================================
 struct Node
 {
     std::uint64_t state;
@@ -235,9 +212,6 @@ inline void reconstruct(std::uint32_t leafId,
     for (std::size_t k = 1; k < ids.size(); ++k) moves.push_back(pool[ids[k]].move);
 }
 
-// ============================================================
-//  BFS (bidirectional)
-// ============================================================
 int solveBFS(std::uint64_t start,
     std::vector<std::uint64_t>& solutionStates,
     std::vector<char>& solutionMoves,
@@ -380,9 +354,6 @@ int solveBFS(std::uint64_t start,
     return 0;
 }
 
-// ============================================================
-//  transposition table (shared by IDS + IDA*)
-// ============================================================
 static constexpr std::size_t TT_BITS = 23;
 static constexpr std::size_t TT_SIZE = std::size_t(1) << TT_BITS;
 static constexpr std::size_t TT_MASK = TT_SIZE - 1;
@@ -413,9 +384,6 @@ inline std::size_t ttHash(std::uint64_t s)
     return (std::size_t)s & TT_MASK;
 }
 
-// ============================================================
-//  IDS — iterative deepening, shared TT (budget-based)
-// ============================================================
 int idsSearch(std::uint64_t state, int blank, int g, int depthLimit, int prevMove,
     std::vector<char>& path, std::vector<std::uint64_t>& states,
     std::uint64_t& nodeCount)
@@ -491,9 +459,6 @@ int solveIDS(std::uint64_t start,
     return 2;
 }
 
-// ============================================================
-//  A*  —  reopen-based, optimal for admissible-but-inconsistent h
-// ============================================================
 int solveAStar(std::uint64_t start,
     std::vector<std::uint64_t>& solutionStates,
     std::vector<char>& solutionMoves,
@@ -509,14 +474,14 @@ int solveAStar(std::uint64_t start,
         bool operator>(const PQItem& o) const
         {
             if (f != o.f) return f > o.f;
-            if (h != o.h) return h > o.h;   // among equal f: smaller h (deeper) first
-            return id > o.id;               // deterministic final tie-break
+            if (h != o.h) return h > o.h;  
+            return id > o.id;               
         }
     };
 
     std::deque<Node> pool;
 
-    // best g seen so far per state (dedup + reopen bookkeeping)
+  
     std::unordered_map<std::uint64_t, std::uint8_t, Hash64> bestG;
     bestG.reserve(1 << 22);
 
@@ -525,7 +490,7 @@ int solveAStar(std::uint64_t start,
     std::priority_queue<PQItem, std::vector<PQItem>, std::greater<PQItem>>
         pq(std::greater<PQItem>(), std::move(heapBuf));
 
-    // root
+  
     {
         int h0 = heuristic(start);
         pool.push_back({ start, UINT32_MAX, 0, (std::uint8_t)h0, 0,
@@ -544,7 +509,7 @@ int solveAStar(std::uint64_t start,
         std::uint64_t s = pool[cid].state;
         int           gc = pool[cid].g;
 
-        // stale?  a shorter path to `s` was found after this node was queued
+       
         auto itG = bestG.find(s);
         if (itG != bestG.end() && itG->second < gc) continue;
 
@@ -565,7 +530,7 @@ int solveAStar(std::uint64_t start,
             int ng = gc + 1;
 
             auto it2 = bestG.find(ns);
-            if (it2 != bestG.end() && it2->second <= ng) continue;   // no improvement
+            if (it2 != bestG.end() && it2->second <= ng) continue;   
 
             bestG[ns] = (std::uint8_t)ng;
             int nh = heuristic(ns);
@@ -579,9 +544,6 @@ int solveAStar(std::uint64_t start,
     return 2;
 }
 
-// ============================================================
-//  IDA*  — recursive, TT, move ordering
-// ============================================================
 int idaSearch(std::uint64_t state, int blank, int g, int bound, int prevMove, int h,
     std::vector<char>& path, std::vector<std::uint64_t>& states,
     std::uint64_t& nodeCount)
