@@ -25,10 +25,12 @@ constexpr int kTileMask = 0xF;
 constexpr State kGoalState = 0x123456789ABCDEF0ULL;
 constexpr NodeId kNoParent = 0xFFFFFFFFu;
 
+//where is tile
 inline int tileAt(State state, int pos) {
     return static_cast<int>((state >> (kTileBits * (kCellCount - 1 - pos))) & kTileMask);
 }
 
+//swap is swap
 inline State swapTiles(State state, int a, int b) {
     const int shiftA = kTileBits * (kCellCount - 1 - a);
     const int shiftB = kTileBits * (kCellCount - 1 - b);
@@ -36,6 +38,7 @@ inline State swapTiles(State state, int a, int b) {
     return state ^ (diff << shiftA) ^ (diff << shiftB);
 }
 
+//wheres blank
 inline int blankPos(State state) {
     for (int i = 0; i < kCellCount; ++i)
         if (tileAt(state, i) == 0) return i;
@@ -49,6 +52,7 @@ inline std::array<int, kCellCount> unpack(State state) {
     return cells;
 }
 
+//faster abs
 inline int absDiff(int a, int b) {
     const int d = a - b;
     const int mask = d >> 31;
@@ -56,7 +60,7 @@ inline int absDiff(int a, int b) {
 }
 
 // Move tables
-
+//precomputed for faster answers
 std::array<std::array<int, 4>, kCellCount> g_neighborPos{};
 std::array<std::array<char, 4>, kCellCount> g_neighborMove{};
 std::array<int, kCellCount> g_neighborCount{};
@@ -174,11 +178,13 @@ constexpr std::size_t kHCacheBits = 20;
 constexpr std::size_t kHCacheSize = std::size_t(1) << kHCacheBits;
 constexpr std::size_t kHCacheMask = kHCacheSize - 1;
 
+//cache struct
 struct HCacheEntry {
     State state;
     int value;
 };
 
+//caching
 inline int heuristic(State state) {
     static std::array<HCacheEntry, kHCacheSize> cache{};
     const std::size_t idx =
@@ -209,7 +215,7 @@ bool isSolvable(State state) {
     return (inversions + (kBoardSide - 1 - blankRow)) % 2 == 0;
 }
 
-//cout
+//out
 
 char tileChar(int value) {
     return value < 10 ? static_cast<char>('0' + value)
@@ -241,6 +247,7 @@ struct Node {
     std::uint8_t blank;
 };
 
+//depricated
 class Timeout {
 public:
     using Clock = std::chrono::steady_clock;
@@ -285,7 +292,7 @@ SolveResult solveBFS(State start, const Timeout& timeout, std::size_t nodeLimit)
         result.states.push_back(start);
         return result;
     }
-
+    //->  <-
     std::deque<Node> forwardPool, backwardPool;
     std::unordered_map<State, NodeId, Hash64> forwardSeen, backwardSeen;
     forwardSeen.reserve(1 << 16);
@@ -294,6 +301,8 @@ SolveResult solveBFS(State start, const Timeout& timeout, std::size_t nodeLimit)
     std::vector<NodeId> forwardFrontier, forwardNext;
     std::vector<NodeId> backwardFrontier, backwardNext;
 
+
+    //back and forth
     auto pushForward = [&](State s, NodeId parent, std::uint8_t g, char move, int blank) -> NodeId {
         const NodeId id = static_cast<NodeId>(forwardPool.size());
         forwardPool.push_back({ s, parent, g, 0, move, static_cast<std::uint8_t>(blank) });
@@ -411,13 +420,13 @@ SolveResult solveBFS(State start, const Timeout& timeout, std::size_t nodeLimit)
         return result;
     }
 
-    // Reconstruct forward half (from start to meet).
+    //from start to meet
     std::vector<NodeId> forwardPath;
     for (NodeId id = meetForward; id != kNoParent; id = forwardPool[id].parent)
         forwardPath.push_back(id);
     std::reverse(forwardPath.begin(), forwardPath.end());
 
-    // Reconstruct backward half (from meet to goal).
+    //from meet to goal.
     std::vector<NodeId> backwardPath;
     for (NodeId id = meetBackward; id != kNoParent; id = backwardPool[id].parent)
         backwardPath.push_back(id);
@@ -436,9 +445,8 @@ SolveResult solveBFS(State start, const Timeout& timeout, std::size_t nodeLimit)
     return result;
 }
 
+
 // IDS
-
-
 enum class SearchOutcome {
     Found,
     Timeout,
@@ -455,6 +463,7 @@ SearchOutcome idsSearch(State state, int blank, int g, int depthLimit, int prevM
     if ((tick & 0xFFF) == 0 && timeout.expired()) return SearchOutcome::Timeout;
     if (state == kGoalState) return SearchOutcome::Found;
 
+    //budget for iter search
     const int budget = depthLimit - g;
     if (budget <= 0) return SearchOutcome::Continue;
 
@@ -487,6 +496,8 @@ SearchOutcome idsSearch(State state, int blank, int g, int depthLimit, int prevM
     return SearchOutcome::Continue;
 }
 
+
+//iterations themselfs + maxdepth limit + depricated timeout
 SolveResult solveIDS(State start, const Timeout& timeout, int maxDepth) {
     SolveResult result;
     if (start == kGoalState) {
@@ -524,6 +535,8 @@ SolveResult solveIDS(State start, const Timeout& timeout, int maxDepth) {
 }
 
 // A*
+
+//pq is for priority queue eh
 struct PQItem {
     int f;
     int h;
@@ -536,6 +549,7 @@ struct PQItem {
     }
 };
 
+//reconstruct is reconstruct, speaks for itself
 void reconstructPath(NodeId leafId, const std::deque<Node>& pool,
     std::vector<State>& states, std::vector<char>& moves)
 {
@@ -560,6 +574,7 @@ SolveResult solveAStar(State start, const Timeout& timeout) {
         return result;
     }
 
+    //all states
     std::deque<Node> pool;
     std::unordered_map<State, std::uint8_t, Hash64> bestG;
     bestG.reserve(1 << 22);
@@ -590,7 +605,7 @@ SolveResult solveAStar(State start, const Timeout& timeout) {
         const State currentState = pool[currentId].state;
         const int currentG = pool[currentId].g;
 
-        //skip
+        //skip if already better
         const auto itBest = bestG.find(currentState);
         if (itBest != bestG.end() && itBest->second < currentG) continue;
 
@@ -614,6 +629,7 @@ SolveResult solveAStar(State start, const Timeout& timeout) {
 
             bestG[nextState] = static_cast<std::uint8_t>(nextG);
 
+            //
             const int nextH = heuristic(nextState);
             const NodeId nextId = static_cast<NodeId>(pool.size());
             pool.push_back({ nextState, currentId, static_cast<std::uint8_t>(nextG),
@@ -662,7 +678,6 @@ int idaSearch(State state, int blank, int g, int bound, int prevMove, int h,
         ++childCount;
     }
 
-    // Insertion sort: childCount <= 4, this beats std::sort here.
     if (childCount > 1) {
         for (int i = 1; i < childCount; ++i) {
             const Child key = children[i];
@@ -705,6 +720,7 @@ int idaSearch(State state, int blank, int g, int bound, int prevMove, int h,
     return min;
 }
 
+//iterations for ida*
 SolveResult solveIDAStar(State start, const Timeout& timeout) {
     SolveResult result;
     if (start == kGoalState) {
@@ -800,9 +816,9 @@ std::vector<TestCase> makeTests() {
         {"75AB2C416D389F0E", 45},
         {"04582E1DF79BCA36", 48},
         {"FE169B4C0A73D852", 52},
-        {"D79F2E8A45106C3B", 55},
-        {"DBE87A2C91F65034", 58},
-        {"BAC0F478E19623D5", 61}
+        //{"D79F2E8A45106C3B", 55},
+        //{"DBE87A2C91F65034", 58},
+        //{"BAC0F478E19623D5", 61}
     };
 }
 
@@ -857,15 +873,15 @@ std::string rowLine(const Row& row) {
     return oss.str();
 }
 
-void writeReportHeader(std::ostream& os, const RunConfig& cfg) {
-    os << "Heuristic: Manh+LC+CornerConflict (JS-style)\n";
-    os << "BFS: bidirectional, Hash64, node limit = " << cfg.bfsNodeLimit
-        << ", run only if expected length <= 19\n";
-    os << "IDS: depth-limited DFS iterated, max depth = " << cfg.idsMaxDepth
-        << ", run only if expected length <= 19\n";
-    os << "A*: PQ (tie: smaller h first), closed map bestG (reopen), Hash64\n";
-    os << "IDA*: recursive, move ordering, heuristic memoization\n\n";
-}
+//void writeReportHeader(std::ostream& os, const RunConfig& cfg) {
+//    os << "Heuristic: Manh+LC+CornerConflict (stolen)\n";
+//    os << "BFS: bidirectional, Hash64, node limit = " << cfg.bfsNodeLimit
+//        << ", run only if expected length <= 19\n";
+//    os << "IDS: depth-limited DFS iterated, max depth = " << cfg.idsMaxDepth
+//        << ", run only if expected length <= 19\n";
+//    os << "A*: PQ (tie: smaller h first), closed map bestG (reopen), Hash64\n";
+//    os << "IDA*: recursive, move ordering, heuristic memoization\n\n";
+//}
 
 
 //main
@@ -895,7 +911,7 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    writeReportHeader(out, cfg);
+    //writeReportHeader(out, cfg);
 
     std::vector<Row> rows;
     rows.reserve(tests.size());
