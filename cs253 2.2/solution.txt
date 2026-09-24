@@ -1,12 +1,13 @@
 Heuristic: Manh+LC+CornerConflict (JS-style)
 BFS: bidirectional, Hash64, node limit = 200000000, run only if expected length <= 19
-IDS: depth-limited DFS iterated, shared TT, max depth = 80, run only if expected length <= 19
+IDS: depth-limited DFS iterated, max depth = 80, run only if expected length <= 19
 A*: PQ (tie: smaller h first), closed map bestG (reopen), Hash64
-IDA*: recursive, TT 23 bits, move ordering
+IDA*: recursive, move ordering, heuristic memoization
 
 ================================================
 Position: 123456789AFB0EDC
 Expected length: unsolvable
+
 Hex: 0x123456789afb0edc
 1 2 3 4 
 5 6 7 8 
@@ -18,6 +19,7 @@ Unsolvable.
 ================================================
 Position: F2345678A0BE91CD
 Expected length: unsolvable
+
 Hex: 0xf2345678a0be91cd
 F 2 3 4 
 5 6 7 8 
@@ -36,10 +38,10 @@ Hex: 0x123456789abcdef0
 9 A B C 
 D E F    
 
-BFS: 0 (0n, 0.0ms)
-IDS: 0 (0n, 0.0ms)
-A*: 0 (0n, 0.0ms)
-IDA*: 0 (0n, 0.0ms)
+BFS: 0 (0.0ms)
+IDS: 0 (0.0ms)
+A*: 0 (0.0ms)
+IDA*: 0 (0.0ms)
 
 ================================================
 Position: 1234067859ACDEBF
@@ -51,10 +53,10 @@ Hex: 0x1234067859acdebf
 5 9 A C 
 D E B F 
 
-BFS: 5 (11n, 0.5ms)
-IDS: 5 (152n, 0.0ms)
-A*: 5 (6n, 12.8ms)
-IDA*: 5 (6n, 0.0ms)
+BFS: 5 (1.6ms)
+IDS: 5 (2.0ms)
+A*: 5 (20.7ms)
+IDA*: 5 (3.3ms)
 
 ================================================
 Position: 5134207896ACDEBF
@@ -66,10 +68,10 @@ Hex: 0x5134207896acdebf
 9 6 A C 
 D E B F 
 
-BFS: 8 (52n, 0.8ms)
-IDS: 8 (2106n, 0.1ms)
-A*: 8 (13n, 12.5ms)
-IDA*: 8 (19n, 0.0ms)
+BFS: 8 (2.1ms)
+IDS: 8 (4.2ms)
+A*: 8 (23.5ms)
+IDA*: 8 (1.6ms)
 
 ================================================
 Position: 16245A3709C8DEBF
@@ -81,10 +83,10 @@ Hex: 0x16245a3709c8debf
    9 C 8 
 D E B F 
 
-BFS: 10 (97n, 1.2ms)
-IDS: 10 (7312n, 0.4ms)
-A*: 10 (11n, 12.9ms)
-IDA*: 10 (11n, 0.0ms)
+BFS: 10 (1.4ms)
+IDS: 10 (5.7ms)
+A*: 10 (23.3ms)
+IDA*: 10 (1.8ms)
 
 ================================================
 Position: 1723068459ACDEBF
@@ -96,10 +98,10 @@ Hex: 0x1723068459acdebf
 5 9 A C 
 D E B F 
 
-BFS: 13 (324n, 0.7ms)
-IDS: 13 (53317n, 2.5ms)
-A*: 13 (21n, 12.4ms)
-IDA*: 13 (45n, 0.0ms)
+BFS: 13 (1.2ms)
+IDS: 13 (4.7ms)
+A*: 13 (23.4ms)
+IDA*: 13 (2.6ms)
 
 ================================================
 Position: 0723168459ACDEBF
@@ -111,10 +113,10 @@ Hex: 0x0723168459acdebf
 5 9 A C 
 D E B F 
 
-BFS: 14 (404n, 1.0ms)
-IDS: 14 (69370n, 2.1ms)
-A*: 14 (22n, 12.2ms)
-IDA*: 14 (47n, 0.0ms)
+BFS: 14 (1.3ms)
+IDS: 14 (5.1ms)
+A*: 14 (19.2ms)
+IDA*: 14 (2.0ms)
 
 ================================================
 Position: 7023168459ACDEBF
@@ -126,10 +128,10 @@ Hex: 0x7023168459acdebf
 5 9 A C 
 D E B F 
 
-BFS: 15 (670n, 1.1ms)
-IDS: 15 (252912n, 7.9ms)
-A*: 15 (23n, 12.3ms)
-IDA*: 15 (50n, 0.0ms)
+BFS: 15 (2.4ms)
+IDS: 15 (11.0ms)
+A*: 15 (19.1ms)
+IDA*: 15 (2.3ms)
 
 ================================================
 Position: 7203168459ACDEBF
@@ -141,10 +143,10 @@ Hex: 0x7203168459acdebf
 5 9 A C 
 D E B F 
 
-BFS: 16 (950n, 1.5ms)
-IDS: 16 (571325n, 18.9ms)
-A*: 16 (27n, 11.3ms)
-IDA*: 16 (59n, 0.0ms)
+BFS: 16 (1.8ms)
+IDS: 16 (15.5ms)
+A*: 16 (18.1ms)
+IDA*: 16 (2.5ms)
 
 ================================================
 Position: 7283160459ACDEBF
@@ -156,10 +158,10 @@ Hex: 0x7283160459acdebf
 5 9 A C 
 D E B F 
 
-BFS: 17 (1559n, 1.6ms)
-IDS: 17 (894416n, 27.9ms)
-A*: 17 (28n, 11.6ms)
-IDA*: 17 (63n, 0.0ms)
+BFS: 17 (2.2ms)
+IDS: 17 (21.3ms)
+A*: 17 (19.0ms)
+IDA*: 17 (1.4ms)
 
 ================================================
 Position: 7283106459ACDEBF
@@ -171,10 +173,10 @@ Hex: 0x7283106459acdebf
 5 9 A C 
 D E B F 
 
-BFS: 18 (2321n, 2.0ms)
-IDS: 18 (2767861n, 97.3ms)
-A*: 18 (39n, 12.2ms)
-IDA*: 18 (155n, 0.1ms)
+BFS: 18 (2.0ms)
+IDS: 18 (59.2ms)
+A*: 18 (16.9ms)
+IDA*: 18 (2.0ms)
 
 ================================================
 Position: 12345678A0BE9FCD
@@ -186,10 +188,10 @@ Hex: 0x12345678a0be9fcd
 A    B E 
 9 F C D 
 
-BFS: 19 (3267n, 2.2ms)
-IDS: 19 (5916916n, 222.3ms)
-A*: 19 (75n, 11.7ms)
-IDA*: 19 (392n, 0.1ms)
+BFS: 19 (2.4ms)
+IDS: 19 (123.0ms)
+A*: 19 (20.1ms)
+IDA*: 19 (3.0ms)
 
 ================================================
 Position: 51247308A6BE9FCD
@@ -203,8 +205,8 @@ A 6 B E
 
 BFS: skipped (expected length > 19)
 IDS: skipped (expected length > 19)
-A*: 27 (229n, 13.2ms)
-IDA*: 27 (776n, 0.3ms)
+A*: 27 (18.6ms)
+IDA*: 27 (2.6ms)
 
 ================================================
 Position: F2345678A0BE91DC
@@ -218,8 +220,8 @@ A    B E
 
 BFS: skipped (expected length > 19)
 IDS: skipped (expected length > 19)
-A*: 33 (4288n, 14.9ms)
-IDA*: 33 (15557n, 2.9ms)
+A*: 33 (27.4ms)
+IDA*: 33 (7.0ms)
 
 ================================================
 Position: 75123804A6BE9FCD
@@ -233,8 +235,8 @@ A 6 B E
 
 BFS: skipped (expected length > 19)
 IDS: skipped (expected length > 19)
-A*: 35 (528n, 12.3ms)
-IDA*: 35 (2934n, 1.0ms)
+A*: 35 (17.1ms)
+IDA*: 35 (3.6ms)
 
 ================================================
 Position: 75AB2C416D389F0E
@@ -248,8 +250,8 @@ Hex: 0x75ab2c416d389f0e
 
 BFS: skipped (expected length > 19)
 IDS: skipped (expected length > 19)
-A*: 45 (50830n, 45.8ms)
-IDA*: 45 (267379n, 43.9ms)
+A*: 45 (75.0ms)
+IDA*: 45 (56.0ms)
 
 ================================================
 Position: 04582E1DF79BCA36
@@ -263,8 +265,8 @@ C A 3 6
 
 BFS: skipped (expected length > 19)
 IDS: skipped (expected length > 19)
-A*: 48 (4062n, 16.0ms)
-IDA*: 48 (21611n, 4.0ms)
+A*: 48 (24.8ms)
+IDA*: 48 (7.0ms)
 
 ================================================
 Position: FE169B4C0A73D852
@@ -278,8 +280,8 @@ D 8 5 2
 
 BFS: skipped (expected length > 19)
 IDS: skipped (expected length > 19)
-A*: 52 (638300n, 498.8ms)
-IDA*: 52 (6594936n, 1053.8ms)
+A*: 52 (768.5ms)
+IDA*: 52 (1960.9ms)
 
 ================================================
 Position: D79F2E8A45106C3B
@@ -293,8 +295,8 @@ D 7 9 F
 
 BFS: skipped (expected length > 19)
 IDS: skipped (expected length > 19)
-A*: 55 (43791n, 37.6ms)
-IDA*: 55 (303252n, 44.3ms)
+A*: 55 (56.0ms)
+IDA*: 55 (58.8ms)
 
 ================================================
 Position: DBE87A2C91F65034
@@ -308,8 +310,8 @@ D B E 8
 
 BFS: skipped (expected length > 19)
 IDS: skipped (expected length > 19)
-A*: 58 (2638762n, 2514.7ms)
-IDA*: 58 (11328893n, 1867.9ms)
+A*: 58 (3819.4ms)
+IDA*: 58 (3480.9ms)
 
 ================================================
 Position: BAC0F478E19623D5
@@ -323,3 +325,34 @@ E 1 9 6
 
 BFS: skipped (expected length > 19)
 IDS: skipped (expected length > 19)
+A*: TIMEOUT
+IDA*: TIMEOUT
+
+========================================================================================================================
+Summary
+========================================================================================================================
+Position          Exp.  BFS(bidi)           IDS                 A*                  IDA*                
+------------------------------------------------------------------------------------------------------------------------
+123456789AFB0EDC  uns.  n/a                 n/a                 n/a                 n/a                 
+F2345678A0BE91CD  uns.  n/a                 n/a                 n/a                 n/a                 
+123456789ABCDEF0  0     0 (0.0ms)           0 (0.0ms)           0 (0.0ms)           0 (0.0ms)           
+1234067859ACDEBF  5     5 (1.6ms)           5 (2.0ms)           5 (20.7ms)          5 (3.3ms)           
+5134207896ACDEBF  8     8 (2.1ms)           8 (4.2ms)           8 (23.5ms)          8 (1.6ms)           
+16245A3709C8DEBF  10    10 (1.4ms)          10 (5.7ms)          10 (23.3ms)         10 (1.8ms)          
+1723068459ACDEBF  13    13 (1.2ms)          13 (4.7ms)          13 (23.4ms)         13 (2.6ms)          
+0723168459ACDEBF  14    14 (1.3ms)          14 (5.1ms)          14 (19.2ms)         14 (2.0ms)          
+7023168459ACDEBF  15    15 (2.4ms)          15 (11.0ms)         15 (19.1ms)         15 (2.3ms)          
+7203168459ACDEBF  16    16 (1.8ms)          16 (15.5ms)         16 (18.1ms)         16 (2.5ms)          
+7283160459ACDEBF  17    17 (2.2ms)          17 (21.3ms)         17 (19.0ms)         17 (1.4ms)          
+7283106459ACDEBF  18    18 (2.0ms)          18 (59.2ms)         18 (16.9ms)         18 (2.0ms)          
+12345678A0BE9FCD  19    19 (2.4ms)          19 (123.0ms)        19 (20.1ms)         19 (3.0ms)          
+51247308A6BE9FCD  27    skipped             skipped             27 (18.6ms)         27 (2.6ms)          
+F2345678A0BE91DC  33    skipped             skipped             33 (27.4ms)         33 (7.0ms)          
+75123804A6BE9FCD  35    skipped             skipped             35 (17.1ms)         35 (3.6ms)          
+75AB2C416D389F0E  45    skipped             skipped             45 (75.0ms)         45 (56.0ms)         
+04582E1DF79BCA36  48    skipped             skipped             48 (24.8ms)         48 (7.0ms)          
+FE169B4C0A73D852  52    skipped             skipped             52 (768.5ms)        52 (1960.9ms)       
+D79F2E8A45106C3B  55    skipped             skipped             55 (56.0ms)         55 (58.8ms)         
+DBE87A2C91F65034  58    skipped             skipped             58 (3819.4ms)       58 (3480.9ms)       
+BAC0F478E19623D5  61    skipped             skipped             TIMEOUT             TIMEOUT             
+------------------------------------------------------------------------------------------------------------------------
