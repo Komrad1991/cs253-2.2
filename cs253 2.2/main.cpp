@@ -980,7 +980,5 @@ int main(int argc, char** argv) {
     for (const Row& row : rows) out << rowLine(row) << "\n";
     out << divider << "\n";
     out.close();
-
-    std::cout << "\nResults written to solution.txt\n";
     return 0;
 }
